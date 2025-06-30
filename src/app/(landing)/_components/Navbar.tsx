@@ -1,9 +1,14 @@
 "use client";
 
 import Logo from "@/assets/Logo";
+import Spinner from "@/components/Spinner";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
 import useScrollTop from "@/hooks/useScrollTop";
 import { cn } from "@/lib/utils";
+import { ClerkLoading, SignInButton, UserButton } from "@clerk/nextjs";
+import { Authenticated, Unauthenticated } from "convex/react";
+import Link from "next/link";
 
 const Navbar = () => {
   const scrolled = useScrollTop();
@@ -21,6 +26,29 @@ const Navbar = () => {
       </div>
 
       <div className="md:ml-auto justify-end w-full flex items-center gap-x-2">
+        <ClerkLoading>
+          <Spinner />
+        </ClerkLoading>
+
+        <Unauthenticated>
+          <SignInButton mode="modal">
+            <Button variant="ghost" size="sm">
+              Login
+            </Button>
+          </SignInButton>
+          <SignInButton mode="modal">
+            <Button size="sm">Get Nekopad Free</Button>
+          </SignInButton>
+        </Unauthenticated>
+
+        <Authenticated>
+          <Button variant="link" size="sm" asChild>
+            <Link href="/documents">Enter Nekopad</Link>
+          </Button>
+
+          <UserButton afterSwitchSessionUrl="/" />
+        </Authenticated>
+
         <ThemeToggle />
       </div>
     </nav>
