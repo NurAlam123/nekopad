@@ -12,7 +12,7 @@ const Heros = () => {
             height={540}
             unoptimized
             draggable="false"
-            className="object-contain pointer-events-none select-none h-1/2 w-1/2 md:w-auto md:h-auto md:aspect-square"
+            className="rounded-xl object-contain pointer-events-none select-none h-1/2 w-1/2 md:w-auto md:h-auto md:aspect-square"
           />
         </div>
       </div>

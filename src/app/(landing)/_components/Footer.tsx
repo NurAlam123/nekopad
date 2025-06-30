@@ -9,7 +9,7 @@ const Footer = () => {
         <p className="font-semibold font-inter">Nekopad</p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-1 text-muted-foreground">
+      <div className="flex justify-between items-center gap-1 text-muted-foreground">
         <Link href="/" className="w-fit md:px-4 hover:underline">
           Privacy Policy
         </Link>

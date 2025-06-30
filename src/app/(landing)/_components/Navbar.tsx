@@ -1,6 +1,7 @@
 "use client";
 
 import Logo from "@/assets/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import useScrollTop from "@/hooks/useScrollTop";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +21,7 @@ const Navbar = () => {
       </div>
 
       <div className="md:ml-auto justify-end w-full flex items-center gap-x-2">
-        Login
+        <ThemeToggle />
       </div>
     </nav>
   );
