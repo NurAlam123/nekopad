@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { inter } from "@/fonts";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ClerkProvider } from "@clerk/nextjs";
+import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
 
 export const metadata: Metadata = {
   title: "Nekopad",
@@ -23,7 +25,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ClerkProvider>
+            <ConvexClientProvider>{children}</ConvexClientProvider>
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>
