@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 const Heading = () => {
   return (
-    <div className="max-w-3xl space-y-4">
+    <div className="col-span-2 max-w-3xl space-y-4">
       <p className="text-lg sm:text-xl md:text-2xl font-medium">
         Write. Organize. Focus. <br />
       </p>
