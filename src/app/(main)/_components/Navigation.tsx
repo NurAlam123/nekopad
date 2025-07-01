@@ -1,14 +1,24 @@
 "use client";
 
-import { ChevronLeft, MenuIcon } from "lucide-react";
+import {
+  ChevronLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
 import { cn } from "@/lib/utils";
 import UserItem from "./UserItem";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/../convex/_generated/api";
+import { Button } from "@/components/ui/button";
+import Item from "./Item";
+import { toast } from "sonner";
+import { prototype } from "events";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -16,6 +26,7 @@ const Navigation = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const documents = useQuery(api.documents.get);
+  const create = useMutation(api.documents.create);
 
   const isResizingRef = useRef<boolean>(false);
   const sidebarRef = useRef<HTMLElement>(null);
@@ -123,6 +134,20 @@ const Navigation = () => {
     }
   };
 
+  // ====
+  // Create a new document
+  // ====
+  const handleCreate = () => {
+    const promise = create({ title: "Untitled" });
+
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note.",
+    });
+  };
+  // ====
+
   if (!hasMounted) return null;
 
   return (
@@ -135,8 +160,8 @@ const Navigation = () => {
           isMobile && "w-0",
         )}
       >
-        <div
-          role="button"
+        <Button
+          variant="ghost"
           onClick={collapse}
           className={cn(
             "h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
@@ -144,10 +169,13 @@ const Navigation = () => {
           )}
         >
           <ChevronLeft className="h-6 w-6" />
-        </div>
+        </Button>
 
         <div>
           <UserItem />
+          <Item label="Search" icon={Search} onClick={() => {}} isSearch />
+          <Item onClick={() => {}} label="Settings" icon={Settings} />
+          <Item onClick={handleCreate} label="New Page" icon={PlusCircle} />
         </div>
 
         <div className="mt-4">
@@ -172,11 +200,12 @@ const Navigation = () => {
       >
         <nav className="bg-transparent px-3 py-2 w-full">
           {isCollapsed && (
-            <MenuIcon
-              onClick={resetWidth}
-              role="button"
-              className="h-6 w-6 text-muted-foreground cursor-pointer"
-            />
+            <Button variant="ghost" onClick={resetWidth}>
+              <MenuIcon
+                role="button"
+                className="h-6 w-6 text-muted-foreground cursor-pointer"
+              />
+            </Button>
           )}
         </nav>
       </div>
