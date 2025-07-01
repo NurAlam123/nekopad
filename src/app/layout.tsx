@@ -4,6 +4,7 @@ import { inter } from "@/fonts";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Nekopad",
@@ -26,7 +27,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ClerkProvider>
-            <ConvexClientProvider>{children}</ConvexClientProvider>
+            <ConvexClientProvider>
+              <Toaster richColors />
+              {children}
+            </ConvexClientProvider>
           </ClerkProvider>
         </ThemeProvider>
       </body>
