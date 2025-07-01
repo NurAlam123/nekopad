@@ -1,9 +1,13 @@
 "use client";
 
-import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
+import { ChevronDown, ChevronRight, LucideIcon, PlusIcon } from "lucide-react";
 import { Id } from "@/../convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useMutation } from "convex/react";
+import { api } from "@/../convex/_generated/api";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface Props {
   label: string;
@@ -31,13 +35,40 @@ const Item = ({
   onExpend,
   expended,
 }: Props) => {
+  const router = useRouter();
+
   const ChevronIcon = expended ? ChevronDown : ChevronRight;
+
+  const create = useMutation(api.documents.create);
 
   const handleExpend = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     event.stopPropagation();
     onExpend?.();
+  };
+
+  const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (!id) return;
+
+    const promise = create({
+      title: "Untitled",
+      parentDocument: id,
+    }).then((documentID) => {
+      if (!expended) {
+        onExpend?.();
+      }
+
+      router.push(`/documents/${documentID}`);
+    });
+
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created.",
+      error: "Failed to create a new note!",
+    });
   };
 
   return (
@@ -75,6 +106,18 @@ const Item = ({
           <span className="text-sm">⌘</span>
           <span>K</span>
         </kbd>
+      )}
+
+      {!!id && (
+        <div className="ml-auto flex items-center gap-x-2">
+          <div
+            role="button"
+            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+            onClick={onCreate}
+          >
+            <PlusIcon className="h-4 w-4 text-muted-foreground" />
+          </div>
+        </div>
       )}
     </div>
   );
