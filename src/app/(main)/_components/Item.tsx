@@ -3,6 +3,7 @@
 import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
 import { Id } from "@/../convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   label: string;
@@ -32,6 +33,13 @@ const Item = ({
 }: Props) => {
   const ChevronIcon = expended ? ChevronDown : ChevronRight;
 
+  const handleExpend = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    onExpend?.();
+  };
+
   return (
     <div
       role="button"
@@ -48,7 +56,7 @@ const Item = ({
         <div
           role="button"
           className="h-full hover:bg-neutral-300 rounded-sm dark:bg-neutral-600 mr-1 cursor-pointer"
-          onClick={() => {}}
+          onClick={handleExpend}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
         </div>
@@ -68,6 +76,20 @@ const Item = ({
           <span>K</span>
         </kbd>
       )}
+    </div>
+  );
+};
+
+Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
+  return (
+    <div
+      style={{
+        paddingLeft: level ? `${level * 12 + 25}px` : "12px",
+      }}
+      className="flex gap-x-2 py-[3px]"
+    >
+      <Skeleton className="h-4 w-4" />
+      <Skeleton className="h-4 w-[30%]" />
     </div>
   );
 };

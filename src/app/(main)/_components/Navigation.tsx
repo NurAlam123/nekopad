@@ -13,19 +13,18 @@ import { useMediaQuery } from "usehooks-ts";
 
 import { cn } from "@/lib/utils";
 import UserItem from "./UserItem";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "@/../convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import Item from "./Item";
 import { toast } from "sonner";
-import { prototype } from "events";
+import DocumentList from "./DocumentList";
 
 const Navigation = () => {
   const pathname = usePathname();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
 
   const isResizingRef = useRef<boolean>(false);
@@ -179,9 +178,7 @@ const Navigation = () => {
         </div>
 
         <div className="mt-4">
-          {documents?.map((document) => (
-            <p key={document._id}>{document.title}</p>
-          ))}
+          <DocumentList />
         </div>
 
         <div
