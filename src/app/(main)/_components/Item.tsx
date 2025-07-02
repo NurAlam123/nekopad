@@ -159,12 +159,18 @@ const Item = ({
 
             <DropdownMenuContent className="w-60" align="start" side="right">
               <DropdownMenuItem onClick={onArchive}>
-                <Button variant="ghost" size="sm">
+                <Button
+                  className="w-full justify-start"
+                  variant="ghost"
+                  size="sm"
+                >
                   <Trash className="h-4 w-4 mr-2" />
                   Delete
                 </Button>
               </DropdownMenuItem>
+
               <DropdownMenuSeparator />
+
               <div className="text-xs text-muted-foreground px-2 py-1">
                 Last edited by: <strong>{user?.fullName}</strong>
               </div>
