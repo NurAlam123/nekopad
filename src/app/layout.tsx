@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { inter } from "@/fonts";
+
+import { Toaster } from "sonner";
+
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
-import { Toaster } from "sonner";
+
+import SettingsModal from "@/components/SettingsModal";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Nekopad",
@@ -29,6 +34,7 @@ export default function RootLayout({
           <ClerkProvider>
             <ConvexClientProvider>
               <Toaster richColors />
+              <SettingsModal />
               {children}
             </ConvexClientProvider>
           </ClerkProvider>

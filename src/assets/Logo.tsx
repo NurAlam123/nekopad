@@ -59,7 +59,6 @@ const Logo = ({ className }: LogoProps) => {
       </g>
 
       <g className="hidden dark:inline">
-        <rect width="1000" height="1000" fill="#000000"></rect>
         <g transform="matrix(2.6058631921824102,0,0,2.6058631921824102,100,105.21172638436485)">
           <svg width="307" height="303" viewBox="0 0 307 303">
             <defs>

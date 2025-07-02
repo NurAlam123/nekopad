@@ -46,11 +46,11 @@ const UserItem = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-80 bg-white z-[999999]"
+        className="w-80 z-[999999]"
         align="start"
         alignOffset={11}
       >
-        <div className="flex flex-col space-y-4 p-2 bg-white rounded-sm border shadow-md">
+        <div className="flex flex-col space-y-4 p-2 bg-white dark:bg-black rounded-lg border shadow-md">
           <div className="flex items-center gap-x-2">
             <div className="rounded-md border bg-secondary p-1">
               <Avatar className="h-8 w-8">
