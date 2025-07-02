@@ -7,6 +7,7 @@ import { Id } from "@/../convex/_generated/dataModel";
 import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Title from "./Title";
+import Banner from "./Banner";
 
 interface Props {
   isCollapsed: boolean;
@@ -32,17 +33,21 @@ const Navbar = ({ isCollapsed, onResetWidth }: Props) => {
   }
 
   return (
-    <nav className="bg-background dark:bg-[#1f1f1f] px-3 py-2 w-full flex items-center gap-x-4">
-      {isCollapsed && (
-        <Button variant="ghost" onClick={onResetWidth}>
-          <MenuIcon className="h-6 w-6 text-muted-foreground" />
-        </Button>
-      )}
+    <>
+      <nav className="bg-background dark:bg-[#1f1f1f] px-3 py-2 w-full flex items-center gap-x-4">
+        {isCollapsed && (
+          <Button variant="ghost" onClick={onResetWidth}>
+            <MenuIcon className="h-6 w-6 text-muted-foreground" />
+          </Button>
+        )}
 
-      <div className="flex items-center justify-between w-full">
-        <Title initialData={document} />
-      </div>
-    </nav>
+        <div className="flex items-center justify-between w-full">
+          <Title initialData={document} />
+        </div>
+      </nav>
+
+      {document.isArchived && <Banner documentID={document._id} />}
+    </>
   );
 };
 
