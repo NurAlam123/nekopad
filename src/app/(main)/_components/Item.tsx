@@ -28,7 +28,7 @@ import { Button } from "@/components/ui/button";
 interface Props {
   label: string;
   icon: LucideIcon;
-  onClick: () => void;
+  onClick?: () => void;
 
   id?: Id<"documents">;
   documentIcon?: string;
