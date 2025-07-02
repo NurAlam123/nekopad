@@ -7,7 +7,7 @@ export const get = query({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Not authenticated");
+      throw new Error("Unauthenticated");
     }
 
     const documents = ctx.db.query("documents").collect();
@@ -24,7 +24,7 @@ export const getSidebar = query({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Not authenticated");
+      throw new Error("Unauthenticated");
     }
 
     const userID = identity.subject;
@@ -48,7 +48,7 @@ export const archive = mutation({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Not authenticated");
+      throw new Error("Unauthenticated");
     }
 
     const userID = identity.subject;
@@ -99,7 +99,7 @@ export const create = mutation({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Not authenticated");
+      throw new Error("Unauthenticated");
     }
 
     const userID = identity.subject;
@@ -121,7 +121,7 @@ export const getTrash = query({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Not authenticated");
+      throw new Error("Unauthenticated");
     }
 
     const userID = identity.subject;
@@ -143,7 +143,7 @@ export const restore = mutation({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Not authenticated");
+      throw new Error("Unauthenticated");
     }
 
     const userID = identity.subject;
@@ -200,7 +200,7 @@ export const remove = mutation({
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("Not authenticated");
+      throw new Error("Unauthenticated");
     }
 
     const userID = identity.subject;
@@ -237,6 +237,73 @@ export const getSearch = query({
       .filter((q) => q.eq(q.field("isArchived"), false))
       .order("desc")
       .collect();
+
+    return document;
+  },
+});
+
+export const getByID = query({
+  args: { documentID: v.id("documents") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    const document = await ctx.db.get(args.documentID);
+
+    if (!document) {
+      throw new Error("Not found");
+    }
+
+    if (document.isPublished && !document.isArchived) {
+      return document;
+    }
+
+    if (!identity) {
+      throw new Error("Unauthenticated");
+    }
+
+    const userID = identity.subject;
+
+    if (document.userID !== userID) {
+      throw new Error("Unauthorized");
+    }
+
+    return document;
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("documents"),
+    title: v.optional(v.string()),
+    content: v.optional(v.string()),
+    converImage: v.optional(v.string()),
+    icon: v.optional(v.string()),
+    isPublished: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("Unauthenticated");
+    }
+
+    const userID = identity.subject;
+
+    const { id, ...rest } = args;
+
+    const existingDocument = await ctx.db.get(id);
+
+    if (!existingDocument) {
+      throw new Error("Not found");
+    }
+
+    if (existingDocument.userID !== userID) {
+      throw new Error("Unauthorized");
+    }
+
+    const document = await ctx.db.patch(id, {
+      ...rest,
+    });
 
     return document;
   },

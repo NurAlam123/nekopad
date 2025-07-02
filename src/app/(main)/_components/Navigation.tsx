@@ -9,27 +9,36 @@ import {
   Settings,
   Trash,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
 import { cn } from "@/lib/utils";
-import UserItem from "./UserItem";
+
 import { useMutation } from "convex/react";
 import { api } from "@/../convex/_generated/api";
+
 import { Button } from "@/components/ui/button";
-import Item from "./Item";
-import { toast } from "sonner";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 import DocumentList from "./DocumentList";
-import { Popover, PopoverContent } from "@/components/ui/popover";
-import { PopoverTrigger } from "@radix-ui/react-popover";
 import TrashBox from "./TrashBox";
+import Item from "./Item";
+import UserItem from "./UserItem";
+
+import { toast } from "sonner";
 
 import { useSearchStore } from "@/store/useSearchStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
+import Navbar from "./Navbar";
 
 const Navigation = () => {
   const pathname = usePathname();
+  const params = useParams();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -221,16 +230,20 @@ const Navigation = () => {
           isMobile && "left-0 w-full",
         )}
       >
-        <nav className="bg-transparent px-3 py-2 w-full">
-          {isCollapsed && (
-            <Button variant="ghost" onClick={resetWidth}>
-              <MenuIcon
-                role="button"
-                className="h-6 w-6 text-muted-foreground cursor-pointer"
-              />
-            </Button>
-          )}
-        </nav>
+        {!!params.documentID ? (
+          <Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
+        ) : (
+          <nav className="bg-transparent px-3 py-2 w-full">
+            {isCollapsed && (
+              <Button variant="ghost" onClick={resetWidth}>
+                <MenuIcon
+                  role="button"
+                  className="h-6 w-6 text-muted-foreground cursor-pointer"
+                />
+              </Button>
+            )}
+          </nav>
+        )}
       </div>
     </>
   );
