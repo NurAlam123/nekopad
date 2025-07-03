@@ -10,6 +10,7 @@ import { api } from "@/../convex/_generated/api";
 import { useParams } from "next/navigation";
 import { Id } from "@/../convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
+import { useEffect, useState } from "react";
 
 interface Props {
   url?: string;
@@ -20,14 +21,16 @@ const Cover = ({ url, preview }: Props) => {
   const params = useParams();
   const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
+  const [validURL, setValidURL] = useState<string>("");
+
   const coverImage = useCoverImageStore();
 
   const { edgestore } = useEdgeStore();
 
   const onRemove = async () => {
-    if (url)
+    if (validURL)
       await edgestore.publicFiles.delete({
-        url: url,
+        url: validURL,
       });
 
     removeCoverImage({
@@ -35,28 +38,48 @@ const Cover = ({ url, preview }: Props) => {
     });
   };
 
+  useEffect(() => {
+    async function checkValidImage() {
+      if (!url) return;
+
+      const res = await fetch(
+        `/api/validate-image?url=${encodeURIComponent(url)}`,
+      );
+
+      const data = await res.json();
+
+      if (data.valid) {
+        setValidURL(url);
+      } else {
+        setValidURL("");
+      }
+    }
+
+    checkValidImage();
+  }, [url]);
+
   return (
     <div
       className={cn(
         "relative w-full h-[35vh] group",
-        !url && "h-[12vh]",
-        url && "bg-muted",
+        !validURL && "h-[12vh]",
+        validURL && "bg-muted",
       )}
     >
-      {!!url && (
+      {!!validURL && (
         <Image
-          src={url}
+          src={validURL}
           fill
           alt="Cover"
           className="object-cover"
-          {...(url.includes(".gif") && { unoptimized: true })}
+          {...(validURL.includes(".gif") && { unoptimized: true })}
         />
       )}
 
       {url && !preview && (
         <div className="opacity-0 group-hover:opacity-100 absolute right-5 bottom-5 flex items-center gap-x-2">
           <Button
-            onClick={() => coverImage.onReplace(url)}
+            onClick={() => coverImage.onReplace(validURL)}
             className="text-muted-foreground text-xs"
             variant="outline"
             size="sm"
