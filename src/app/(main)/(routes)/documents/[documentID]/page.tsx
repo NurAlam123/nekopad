@@ -9,9 +9,15 @@ import { api } from "@/../convex/_generated/api";
 import Toolbar from "@/components/Toolbar";
 import Cover from "@/components/Cover";
 import { Skeleton } from "@/components/ui/skeleton";
-import Editor from "@/components/Editor";
+import { useMemo } from "react";
+import dynamic from "next/dynamic";
 
 const DocumentPage = () => {
+  const Editor = useMemo(
+    () => dynamic(() => import("@/components/Editor"), { ssr: false }),
+    [],
+  );
+
   const params = useParams<{ documentID: Id<"documents"> }>();
 
   const document = useQuery(api.documents.getByID, {
