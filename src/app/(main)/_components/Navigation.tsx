@@ -127,7 +127,7 @@ const Navigation = () => {
       sidebarRef.current.style.width = isMobile ? "100%" : "240px";
       navRef.current.style.setProperty(
         "width",
-        isMobile ? "0" : "calc(100% - 240px)",
+        isMobile ? "0" : "calc(100% - 260px)",
       );
       navRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
 
@@ -225,7 +225,7 @@ const Navigation = () => {
       <div
         ref={navRef}
         className={cn(
-          "absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]",
+          "absolute top-0 z-[99999] left-60 w-[calc(100%-260px)]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "left-0 w-full",
         )}

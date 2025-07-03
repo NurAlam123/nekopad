@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 import { useMutation } from "convex/react";
 import { Doc } from "@/../convex/_generated/dataModel";
 import { api } from "@/../convex/_generated/api";
+import { useCoverImageStore } from "@/store/useCoverImageStore";
 
 interface Props {
   initialData: Doc<"documents">;
@@ -22,6 +23,8 @@ const Toolbar = ({ initialData, preview }: Props) => {
 
   const update = useMutation(api.documents.update);
   const removeIcon = useMutation(api.documents.removeIcon);
+
+  const coverImage = useCoverImageStore();
 
   const enableInput = () => {
     if (preview) return;
@@ -105,7 +108,7 @@ const Toolbar = ({ initialData, preview }: Props) => {
 
         {!initialData.coverImage && !preview && (
           <Button
-            onClick={() => {}}
+            onClick={coverImage.onOpen}
             className="text-muted-foreground text-xs"
             variant="outline"
             size="sm"

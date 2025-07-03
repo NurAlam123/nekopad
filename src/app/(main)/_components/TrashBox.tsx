@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import Spinner from "@/components/Spinner";
 import { Search, Trash, Undo } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import ConfirmModal from "@/components/ConfirmModal";
+import ConfirmModal from "@/components/modal/ConfirmModal";
 
 const TrashBox = () => {
   const router = useRouter();

@@ -6,8 +6,8 @@ import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
-
-import SettingsModal from "@/components/SettingsModal";
+import { EdgeStoreProvider } from "@/lib/edgestore";
+import ModalProvider from "@/components/providers/ModalProvider";
 
 import "./globals.css";
 
@@ -33,9 +33,11 @@ export default function RootLayout({
         >
           <ClerkProvider>
             <ConvexClientProvider>
-              <Toaster richColors />
-              <SettingsModal />
-              {children}
+              <EdgeStoreProvider>
+                <Toaster richColors />
+                <ModalProvider />
+                {children}
+              </EdgeStoreProvider>
             </ConvexClientProvider>
           </ClerkProvider>
         </ThemeProvider>

@@ -24,7 +24,6 @@ interface Props {
 }
 
 const Menu = ({ documentID }: Props) => {
-  const router = useRouter();
   const { user } = useUser();
 
   const archive = useMutation(api.documents.archive);

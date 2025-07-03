@@ -1,20 +1,12 @@
 "use client";
 
 import { useSettingsStore } from "@/store/useSettingsStore";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Label } from "@radix-ui/react-label";
-import { ThemeToggle } from "./ThemeToggle";
-import { useEffect, useState } from "react";
+import { ThemeToggle } from "../ThemeToggle";
 
 const SettingsModal = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const { isOpen, onClose } = useSettingsStore();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

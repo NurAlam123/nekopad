@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { api } from "@/../convex/_generated/api";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import ConfirmModal from "@/components/ConfirmModal";
+import ConfirmModal from "@/components/modal/ConfirmModal";
 
 interface Props {
   documentID: Id<"documents">;
