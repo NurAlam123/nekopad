@@ -2,8 +2,8 @@
 
 import { useSettingsStore } from "@/store/useSettingsStore";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Label } from "@radix-ui/react-label";
 import { ThemeToggle } from "../ThemeToggle";
+import { Label } from "../ui/label";
 
 const SettingsModal = () => {
   const { isOpen, onClose } = useSettingsStore();

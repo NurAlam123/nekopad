@@ -12,8 +12,11 @@ import { Id } from "@/../convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
-import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 interface Props {
   url?: string;

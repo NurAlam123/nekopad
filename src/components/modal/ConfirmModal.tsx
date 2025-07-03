@@ -1,6 +1,5 @@
 "use client";
 
-import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,6 +9,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from "../ui/alert-dialog";
 
 interface Props {

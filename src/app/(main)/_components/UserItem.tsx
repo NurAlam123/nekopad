@@ -2,13 +2,13 @@
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { SignOutButton, useUser } from "@clerk/nextjs";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+} from "@/components/ui/dropdown-menu";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import { ChevronsLeftRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -50,7 +50,7 @@ const UserItem = () => {
         align="start"
         alignOffset={11}
       >
-        <div className="flex flex-col space-y-4 p-2 bg-white dark:bg-black rounded-lg border shadow-md">
+        <div className="flex flex-col space-y-4">
           <div className="flex items-center gap-x-2">
             <div className="rounded-md border bg-secondary p-1">
               <Avatar className="h-8 w-8">
