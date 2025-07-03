@@ -3,12 +3,13 @@
 import { useParams } from "next/navigation";
 
 import { Id } from "@/../convex/_generated/dataModel";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/../convex/_generated/api";
 
 import Toolbar from "@/components/Toolbar";
 import Cover from "@/components/Cover";
 import { Skeleton } from "@/components/ui/skeleton";
+import Editor from "@/components/Editor";
 
 const DocumentPage = () => {
   const params = useParams<{ documentID: Id<"documents"> }>();
@@ -16,6 +17,15 @@ const DocumentPage = () => {
   const document = useQuery(api.documents.getByID, {
     documentID: params.documentID,
   });
+
+  const update = useMutation(api.documents.update);
+
+  const onChange = (content: string) => {
+    update({
+      id: params.documentID,
+      content,
+    });
+  };
 
   if (document === undefined) {
     return (
@@ -43,6 +53,8 @@ const DocumentPage = () => {
       <Cover url={document.coverImage} />
       <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
         <Toolbar initialData={document} />
+
+        <Editor onChange={onChange} initialContent={document.content} />
       </div>
     </div>
   );

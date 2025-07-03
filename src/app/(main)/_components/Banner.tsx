@@ -17,6 +17,8 @@ const Banner = ({ documentID }: Props) => {
   const restore = useMutation(api.documents.restore);
 
   const onRemove = () => {
+    router.push("/documents");
+
     const promise = remove({ id: documentID });
 
     toast.promise(promise, {
@@ -24,8 +26,6 @@ const Banner = ({ documentID }: Props) => {
       success: "Note deleted!",
       error: "Failed to delete note.",
     });
-
-    router.push("/documents");
   };
 
   const onRestore = () => {
