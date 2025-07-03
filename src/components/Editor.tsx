@@ -6,6 +6,7 @@ import { BlockNoteView } from "@blocknote/mantine";
 import { useTheme } from "next-themes";
 import "@blocknote/mantine/style.css";
 import { useEdgeStore } from "@/lib/edgestore";
+import { cn } from "@/lib/utils";
 
 interface Props {
   onChange: (value: string) => void;

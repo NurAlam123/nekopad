@@ -85,7 +85,7 @@ const Cover = ({ url, preview }: Props) => {
         <div className="opacity-0 group-hover:opacity-100 absolute right-5 bottom-5 flex items-center gap-x-2">
           <Button
             onClick={() => coverImage.onReplace(validURL)}
-            className="text-muted-foreground text-xs"
+            className="text-muted-foreground text-xs dark:backdrop-blur-md dark:text-foreground dark:hover:text-muted"
             variant="outline"
             size="sm"
           >
@@ -95,7 +95,7 @@ const Cover = ({ url, preview }: Props) => {
 
           <Button
             onClick={onRemove}
-            className="text-muted-foreground text-xs"
+            className="text-muted-foreground text-xs dark:backdrop-blur-md dark:text-foreground dark:hover:text-muted"
             variant="outline"
             size="sm"
           >

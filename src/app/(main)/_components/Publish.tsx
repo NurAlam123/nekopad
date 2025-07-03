@@ -34,7 +34,7 @@ const Publish = ({ initialData }: Props) => {
     const promise = update({
       id: initialData._id,
       isPublished: true,
-    });
+    }).then(() => setIsSubmitting(false));
 
     toast.promise(promise, {
       loading: "Note publishing...",
@@ -49,7 +49,7 @@ const Publish = ({ initialData }: Props) => {
     const promise = update({
       id: initialData._id,
       isPublished: false,
-    });
+    }).then(() => setIsSubmitting(false));
 
     toast.promise(promise, {
       loading: "Note unpublishing...",
