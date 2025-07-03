@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const Heading = () => {
   return (
@@ -17,7 +18,9 @@ const Heading = () => {
       </h3>
 
       <Button>
-        Enter Nekopad <ArrowRight className="h-4 w-4 ml-2" />{" "}
+        <Link href="/documents" className="w-full flex items-center">
+          Enter Nekopad <ArrowRight className="h-4 w-4 ml-2" />{" "}
+        </Link>
       </Button>
     </div>
   );
