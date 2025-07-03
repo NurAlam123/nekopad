@@ -74,6 +74,7 @@ export const archive = mutation({
       for (const child of children) {
         await ctx.db.patch(child._id, {
           isArchived: true,
+          isPublished: false,
         });
 
         await recursiveArchive(child._id);

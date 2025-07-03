@@ -188,6 +188,7 @@ const Navigation = () => {
           className={cn(
             "h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
             isMobile && "opacity-100",
+            isCollapsed && "hidden",
           )}
         >
           <ChevronLeft className="h-6 w-6" />
@@ -210,6 +211,7 @@ const Navigation = () => {
             <PopoverTrigger className="w-full mt-4">
               <Item label="Trash" icon={Trash} />
             </PopoverTrigger>
+
             <PopoverContent
               className="p-0 w-72"
               side={isMobile ? "bottom" : "right"}

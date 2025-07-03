@@ -79,7 +79,7 @@ const Toolbar = ({ initialData, preview }: Props) => {
 
   return (
     <div className="pl-[54px] group relative">
-      {!!initialData.icon && !preview && (
+      {!!initialData.icon && !preview && !initialData.isArchived && (
         <div className="flex items-center gap-x-2 group/icon pt-6">
           <IconPicker onChange={onIconSelect}>
             <p className="text-6xl hover:opacity-75 transition">
@@ -98,12 +98,12 @@ const Toolbar = ({ initialData, preview }: Props) => {
         </div>
       )}
 
-      {!!initialData.icon && preview && (
+      {!!initialData.icon && (preview || initialData.isArchived) && (
         <p className="text-6xl pt-6">{initialData.icon}</p>
       )}
 
-      <div className="opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
-        {!initialData.icon && !preview && (
+      <div className="opacity-100 md:opacity-0 group-hover:opacity-100 flex items-center gap-x-1 py-4">
+        {!initialData.icon && !preview && !initialData.isArchived && (
           <IconPicker asChild onChange={onIconSelect}>
             <Button
               className="text-muted-foreground text-xs"
@@ -116,7 +116,7 @@ const Toolbar = ({ initialData, preview }: Props) => {
           </IconPicker>
         )}
 
-        {!initialData.coverImage && !preview && (
+        {!initialData.coverImage && !preview && !initialData.isArchived && (
           <Button
             onClick={coverImage.onOpen}
             className="text-muted-foreground text-xs"
@@ -137,6 +137,7 @@ const Toolbar = ({ initialData, preview }: Props) => {
           value={value}
           onChange={(e) => onInput(e.target.value)}
           onFocus={onTitleFocus}
+          disabled={preview || initialData.isArchived}
           className="text-5xl bg-transparent font-bold break-words outline-none text-[#3f3f3f] dark:text-[#cfcfcf] resize-none"
         />
       ) : (

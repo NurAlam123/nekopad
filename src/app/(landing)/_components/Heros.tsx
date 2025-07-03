@@ -4,7 +4,7 @@ const Heros = () => {
   return (
     <div className="flex flex-col items-center max-w-5xl">
       <div className="flex items-center">
-        <div className="relative flex justify-center items-center">
+        <div className="relative flex justify-center items-center rounded-xl overflow-hidden">
           <Image
             src="/nosey.gif"
             alt="Nosey Heros"

@@ -1,22 +1,42 @@
 "use client";
 
+import Link from "next/link";
+
+import { ClerkLoading, SignInButton, UserButton } from "@clerk/nextjs";
+import { Authenticated, Unauthenticated } from "convex/react";
+
 import Logo from "@/assets/Logo";
 import Spinner from "@/components/Spinner";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
-import useScrollTop from "@/hooks/useScrollTop";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { ClerkLoading, SignInButton, UserButton } from "@clerk/nextjs";
-import { Authenticated, Unauthenticated } from "convex/react";
-import Link from "next/link";
+
+import { useMediaQuery } from "usehooks-ts";
+import useScrollTop from "@/hooks/useScrollTop";
+import { MenuIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const scrolled = useScrollTop();
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return;
 
   return (
     <nav
       className={cn(
-        "z-50 bg-background fixed top-0 flex items-center w-full p-6 transition-shadow duration-150 ease-in-out",
+        "z-50 bg-background fixed top-0 flex items-center justify-between w-full p-6 transition-shadow duration-150 ease-in-out",
         scrolled && "border-b shadow-sm",
       )}
     >
@@ -25,7 +45,27 @@ const Navbar = () => {
         <p className="font-semibold font-inter">Nekopad</p>
       </div>
 
-      <div className="md:ml-auto justify-end w-full flex items-center gap-x-2">
+      {isMobile ? (
+        <Popover>
+          <PopoverTrigger className="border p-2 rounded-sm">
+            <MenuIcon className="size-4" />
+          </PopoverTrigger>
+
+          <PopoverContent className="w-full p-4 -translate-x-2">
+            <Navbar.Bar />
+          </PopoverContent>
+        </Popover>
+      ) : (
+        <Navbar.Bar />
+      )}
+    </nav>
+  );
+};
+
+Navbar.Bar = function NavbarBar({ isMobile }: { isMobile?: boolean }) {
+  return (
+    <>
+      <div className="md:ml-auto justify-end w-full flex flex-col md:flex-row items-center gap-y-2 md:gap-y-0 gap-x-2">
         <ClerkLoading>
           <Spinner />
         </ClerkLoading>
@@ -49,9 +89,9 @@ const Navbar = () => {
           <UserButton afterSwitchSessionUrl="/" />
         </Authenticated>
 
-        <ThemeToggle />
+        <ThemeToggle className={cn(isMobile && "w-full")} />
       </div>
-    </nav>
+    </>
   );
 };
 

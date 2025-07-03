@@ -13,9 +13,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   initialData: Doc<"documents">;
+  isArchived: boolean;
 }
 
-const Title = ({ initialData: initalData }: Props) => {
+const Title = ({ initialData: initalData, isArchived }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const update = useMutation(api.documents.update);
@@ -55,7 +56,7 @@ const Title = ({ initialData: initalData }: Props) => {
     <div className="flex items-center gap-x-1">
       {!!initalData.icon && <p>{initalData.icon}</p>}
 
-      {isEditing ? (
+      {isEditing && !isArchived ? (
         <Input
           ref={inputRef}
           onClick={enableInput}

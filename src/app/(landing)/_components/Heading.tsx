@@ -3,9 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { useClerk } from "@clerk/nextjs";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const Heading = () => {
-  const { openSignUp } = useClerk();
+  const { openSignIn, isSignedIn } = useClerk();
   return (
     <div className="col-span-2 max-w-3xl space-y-4">
       <p className="text-lg sm:text-xl md:text-2xl font-medium">
@@ -18,9 +19,17 @@ const Heading = () => {
         Create Workspace for Notes, Docs &amp; More
       </h3>
 
-      <Button onClick={() => openSignUp()}>
-        Enter Nekopad <ArrowRight className="h-4 w-4 ml-2" />{" "}
-      </Button>
+      {isSignedIn ? (
+        <Button>
+          <Link href="/documents" className="w-full flex items-center">
+            Enter Nekopad <ArrowRight className="h-4 w-4 ml-3" />
+          </Link>
+        </Button>
+      ) : (
+        <Button onClick={() => openSignIn()}>
+          Enter Nekopad <ArrowRight className="h-4 w-4 ml-2" />
+        </Button>
+      )}
     </div>
   );
 };
