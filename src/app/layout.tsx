@@ -31,7 +31,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClerkProvider>
+          <ClerkProvider
+            signUpForceRedirectUrl={
+              process.env.CLERK_SIGN_UP_FORCE_REDIRECT_URL
+            }
+            signInForceRedirectUrl={
+              process.env.CLERK_SIGN_UP_FORCE_REDIRECT_URL
+            }
+          >
             <ConvexClientProvider>
               <EdgeStoreProvider>
                 <Toaster richColors />
