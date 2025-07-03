@@ -29,13 +29,17 @@ const Cover = ({ url, preview }: Props) => {
 
   const onRemove = async () => {
     if (validURL)
-      await edgestore.publicFiles.delete({
-        url: validURL,
-      });
+      try {
+        await edgestore.publicFiles.delete({
+          url: validURL,
+        });
+      } catch {}
 
     removeCoverImage({
       id: params.documentID as Id<"documents">,
     });
+
+    setValidURL("");
   };
 
   useEffect(() => {
@@ -76,7 +80,7 @@ const Cover = ({ url, preview }: Props) => {
         />
       )}
 
-      {url && !preview && (
+      {validURL && !preview && (
         <div className="opacity-0 group-hover:opacity-100 absolute right-5 bottom-5 flex items-center gap-x-2">
           <Button
             onClick={() => coverImage.onReplace(validURL)}

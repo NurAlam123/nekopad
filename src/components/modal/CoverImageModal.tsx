@@ -70,6 +70,14 @@ const CoverImageModal = () => {
     if (data.valid) {
       setImageUrlError("");
 
+      if (url && url.includes("files.edgestore.dev")) {
+        try {
+          await edgestore.publicFiles.delete({
+            url,
+          });
+        } catch {}
+      }
+
       await update({
         id: params.documentID as Id<"documents">,
         coverImage: imageUrl,
