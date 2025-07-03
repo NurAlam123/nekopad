@@ -2,7 +2,7 @@
 
 import { useCoverImageStore } from "@/store/useCoverImageStore";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useEdgeStore } from "@/lib/edgestore";
 
 import { useMutation } from "convex/react";
@@ -15,7 +15,7 @@ import { SingleImageDropzone } from "../upload/single-image";
 const CoverImageModal = () => {
   const params = useParams();
 
-  const { onClose, isOpen } = useCoverImageStore();
+  const { onClose, isOpen, url } = useCoverImageStore();
 
   const { edgestore } = useEdgeStore();
 
@@ -25,12 +25,12 @@ const CoverImageModal = () => {
     async ({ file, onProgressChange, signal }) => {
       const res = await edgestore.publicFiles.upload({
         file,
+        options: {
+          replaceTargetUrl: url,
+        },
         signal,
         onProgressChange,
       });
-      // you can run some server action or api here
-      // to add the necessary data to your database
-      console.log(res);
 
       await update({
         id: params.documentID as Id<"documents">,
@@ -39,7 +39,7 @@ const CoverImageModal = () => {
 
       return res;
     },
-    [edgestore, params, update],
+    [edgestore, params, update, url],
   );
 
   return (
