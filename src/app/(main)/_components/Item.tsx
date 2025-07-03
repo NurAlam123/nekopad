@@ -94,7 +94,7 @@ const Item = ({
     event.stopPropagation();
 
     if (!id) return;
-    const promise = archive({ id }).then(() => router.push("/documents"));
+    const promise = archive({ id });
 
     toast.promise(promise, {
       loading: "Moving to trash...",
