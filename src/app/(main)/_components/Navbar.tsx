@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import Title from "./Title";
 import Banner from "./Banner";
 import Menu from "./Menu";
+import Publish from "./Publish";
 
 interface Props {
   isCollapsed: boolean;
@@ -49,6 +50,7 @@ const Navbar = ({ isCollapsed, onResetWidth }: Props) => {
           <Title initialData={document} />
 
           <div className="flex items-center gap-x-2">
+            <Publish initialData={document} />
             <Menu documentID={document._id} />
           </div>
         </div>
