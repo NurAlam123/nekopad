@@ -13,7 +13,13 @@ import { SingleImageDropzone } from "../upload/single-image";
 import { api } from "@/../convex/_generated/api";
 import { Id } from "@/../convex/_generated/dataModel";
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 
@@ -102,6 +108,7 @@ const CoverImageModal = () => {
             Cover Image
           </DialogTitle>
         </DialogHeader>
+        <DialogDescription>Add or change your cover image</DialogDescription>
         <UploaderProvider uploadFn={uploadFn} autoUpload>
           <SingleImageDropzone className="w-full items-center justify-center" />
         </UploaderProvider>

@@ -11,6 +11,7 @@ import { useParams } from "next/navigation";
 import { Id } from "@/../convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useEffect, useState } from "react";
+import { Skeleton } from "./ui/skeleton";
 
 interface Props {
   url?: string;
@@ -105,6 +106,10 @@ const Cover = ({ url, preview }: Props) => {
       )}
     </div>
   );
+};
+
+Cover.Skeleton = function CoverSkeleton() {
+  return <Skeleton className="w-full h-[22vh]" />;
 };
 
 export default Cover;

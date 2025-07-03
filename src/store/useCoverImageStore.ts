@@ -11,7 +11,7 @@ interface CoverImageStore {
 export const useCoverImageStore = create<CoverImageStore>((set) => ({
   isOpen: false,
   url: undefined,
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false }),
+  onOpen: () => set({ isOpen: true, url: undefined }),
+  onClose: () => set({ isOpen: false, url: undefined }),
   onReplace: (url: string) => set({ isOpen: true, url }),
 }));
