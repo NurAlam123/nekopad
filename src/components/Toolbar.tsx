@@ -67,6 +67,16 @@ const Toolbar = ({ initialData, preview }: Props) => {
     removeIcon({ id: initialData._id });
   };
 
+  const onTitleFocus = () => {
+    if (!inputRef.current) return;
+
+    inputRef.current.value = "";
+
+    if (value.toLowerCase() !== "untitled") {
+      inputRef.current.value = value;
+    }
+  };
+
   return (
     <div className="pl-[54px] group relative">
       {!!initialData.icon && !preview && (
@@ -126,6 +136,7 @@ const Toolbar = ({ initialData, preview }: Props) => {
           onKeyDown={onKeyDown}
           value={value}
           onChange={(e) => onInput(e.target.value)}
+          onFocus={onTitleFocus}
           className="text-5xl bg-transparent font-bold break-words outline-none text-[#3f3f3f] dark:text-[#cfcfcf] resize-none"
         />
       ) : (
