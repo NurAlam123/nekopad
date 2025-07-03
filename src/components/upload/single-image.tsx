@@ -162,12 +162,14 @@ const SingleImageDropzone = React.forwardRef<
         <input ref={ref} {...getInputProps()} {...props} />
 
         {displayUrl ? (
+          /* eslint-disable @next/next/no-img-element */
           <img
             className="h-full w-full rounded-md object-cover"
             src={displayUrl}
             alt={fileState?.file.name ?? "uploaded image"}
           />
         ) : (
+          /* eslint-enable @next/next/no-img-element */
           // Placeholder content shown when no image is selected
           <div
             className={cn(

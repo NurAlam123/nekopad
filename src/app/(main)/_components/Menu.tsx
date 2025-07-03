@@ -1,7 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 import { useUser } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
 
