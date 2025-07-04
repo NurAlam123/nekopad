@@ -1,11 +1,14 @@
 "use client";
 
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
-import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
+import { codeBlock } from "@blocknote/code-block";
+
 import { useTheme } from "next-themes";
-import "@blocknote/mantine/style.css";
 import { useEdgeStore } from "@/lib/edgestore";
+import { useCreateBlockNote } from "@blocknote/react";
+
+import "@blocknote/mantine/style.css";
 
 interface Props {
   onChange: (value: string) => void;
@@ -27,6 +30,7 @@ const Editor = ({ initialContent, editable, onChange }: Props) => {
   };
 
   const editor: BlockNoteEditor = useCreateBlockNote({
+    codeBlock,
     initialContent: initialContent
       ? (JSON.parse(initialContent) as PartialBlock[])
       : undefined,
