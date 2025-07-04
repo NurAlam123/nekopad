@@ -16,9 +16,10 @@ import { Skeleton } from "./ui/skeleton";
 interface Props {
   url?: string;
   preview?: boolean;
+  isArchived?: boolean;
 }
 
-const Cover = ({ url, preview }: Props) => {
+const Cover = ({ url, preview, isArchived }: Props) => {
   const [validURL, setValidURL] = useState<string>("");
 
   useEffect(() => {
@@ -54,12 +55,13 @@ const Cover = ({ url, preview }: Props) => {
           src={validURL}
           fill
           alt="Cover"
-          className="object-cover"
+          className="object-cover select-none"
+          draggable="false"
           {...(validURL.includes(".gif") && { unoptimized: true })}
         />
       )}
 
-      {validURL && !preview && (
+      {validURL && !preview && !isArchived && (
         <Cover.Menu validURL={validURL} setValidURL={setValidURL} />
       )}
     </div>
