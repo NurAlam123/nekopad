@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nekopad
+
+> **Write. Organize. Focus.**
+
+<img title="" src="file:///run/media/natrium/Programming/Web/nekopad/public/og-image.png" alt="./public/og-image.png" width="673" data-align="center">
+
+Welcome to **Nekopad**, your modern, minimalist workspace for notes, documents, and more.  
+Create, publish, and organize your thoughts in a clean interface.
+
+🌐 [Try Nekopad Live](https://nekopad.netlify.app/)
+
+---
+
+## Features
+
+- Block-based Editor
+- Public Sharing
+- Responsive Design
+- Modern and elegent UI
+- Quickly search through your documents
+- Archive or Delete your documents
+- Add emoji icon and cover image
+- Upload image, audio, video files
+
+---
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/)
+
+- [Tailwind CSS ](https://tailwindcss.com/)
+
+- [ShadCN UI](https://ui.shadcn.com/)
+
+- [Clerk](https://clerk.com/) - For authentication and user management
+
+- [Convex](https://convex.dev/) - For serverless backend and database
+
+- [Edgestore](https://edgestore.dev/) - For file uploads and storage
+
+---
 
 ## Getting Started
 
-First, run the development server:
+> Clone the project and install dependencies.
+
+```bash
+git clone https://github.com/nuralam123/nekopad.git
+cd nekopad
+npm install
+```
+
+> Set up environment variables
+
+Create a `.env.local` file with required keys for **Clerk**, **Convex**, and **Edgestore** (check their respective docs).
+
+> Run the app locally.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` - and you are live.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
+This project is under [MIT LICENSE](./LICENSE) © Nur Alam
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Acknowledgements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- This project was originally showcased at [Code With Antonio - YouTube](https://www.youtube.com/@codewithantonio)
+- Tutorial video: [Fullstack Notion Clone: Next.js 13, React, Convex, Tailwind | Full Course 2023 - YouTube](https://youtu.be/0OaDyjB9Ib8?si=7utWIYuKkBVT6ors)
