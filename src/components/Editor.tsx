@@ -43,7 +43,6 @@ const Editor = ({ initialContent, editable, onChange }: Props) => {
       editor={editor}
       theme={resolvedTheme === "dark" ? "dark" : "light"}
       onChange={() => onChange(JSON.stringify(editor.document))}
-      autoFocus={editable}
     ></BlockNoteView>
   );
 };

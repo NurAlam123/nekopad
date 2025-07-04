@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { ImageIcon, MoreHorizontal, X } from "lucide-react";
+import { ImageIcon, X } from "lucide-react";
 import { useCoverImageStore } from "@/store/useCoverImageStore";
 import { useMutation } from "convex/react";
 import { api } from "@/../convex/_generated/api";
@@ -12,19 +12,13 @@ import { Id } from "@/../convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
 
 interface Props {
   url?: string;
   preview?: boolean;
-  isArchived?: boolean;
 }
 
-const Cover = ({ url, preview, isArchived }: Props) => {
+const Cover = ({ url, preview }: Props) => {
   const [validURL, setValidURL] = useState<string>("");
 
   useEffect(() => {
@@ -66,23 +60,7 @@ const Cover = ({ url, preview, isArchived }: Props) => {
       )}
 
       {validURL && !preview && (
-        <div className={cn("relative w-full h-full", isArchived && "hidden")}>
-          <div>
-            <div className="hidden md:block">
-              <Cover.Menu validURL={validURL} setValidURL={setValidURL} />
-            </div>
-            <div className="absolute bottom-0 right-2 block md:hidden">
-              <DropdownMenu>
-                <DropdownMenuTrigger className="border rounded-sm dark:backdrop-blur-md bg-muted p-1 cursor-pointer md:hidden">
-                  <MoreHorizontal className="text-muted-foreground dark:text-foreground" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <Cover.Menu validURL={validURL} setValidURL={setValidURL} />
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-        </div>
+        <Cover.Menu validURL={validURL} setValidURL={setValidURL} />
       )}
     </div>
   );
@@ -119,7 +97,7 @@ Cover.Menu = function CoverMenu({
 
   return (
     <>
-      <div className="opacity-100 md:opacity-0 group-hover:opacity-100 absolute right-5 bottom-5 flex items-center gap-x-2">
+      <div className="opacity-0 group-hover:opacity-100 absolute right-5 bottom-5 flex items-center gap-x-2">
         <Button
           onClick={() => coverImage.onReplace(validURL)}
           className="text-muted-foreground text-xs dark:backdrop-blur-md dark:text-foreground dark:hover:text-muted"
