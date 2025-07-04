@@ -46,7 +46,7 @@ const Navbar = ({ isCollapsed, onResetWidth }: Props) => {
           </Button>
         )}
 
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full px-4">
           <Title isArchived={document.isArchived} initialData={document} />
           {!document.isArchived && (
             <div className="flex items-center gap-x-2">
